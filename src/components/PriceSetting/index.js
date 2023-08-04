@@ -6,7 +6,7 @@ import { formatNumberWithCommas } from './actions'
 
 const PriceSetting = ({ detail, index, priceList, setPriceList }) => {
   // console.log('detail:', detail)
-  console.log('priceList:', priceList)
+  // console.log('priceList:', priceList)
   const { ageRange = [] , price = '' } = detail
 
   return (
@@ -21,7 +21,7 @@ const PriceSetting = ({ detail, index, priceList, setPriceList }) => {
             value={ageRange[0]}
             onChange={value => {
               ageRange[0] = value
-              priceList[index].ageRange = [...ageRange]
+              priceList[index].ageRange = ageRange
               setPriceList([...priceList])
             }}
           />
@@ -32,28 +32,32 @@ const PriceSetting = ({ detail, index, priceList, setPriceList }) => {
             value={ageRange[1]}
             onChange={value => {
               ageRange[1] = value
-              priceList[index].ageRange = [...ageRange]
+              priceList[index].ageRange = ageRange
               setPriceList([...priceList])
             }}
           />
         </Col>
         <Col>
-          <div>入住費用</div>
+          <div>入住費用(每人每晚)</div>
           <Input
             style={{ width: '250px' }}
             prefix='TWD'
-            value={formatNumberWithCommas(price)}
+            value={price}
             onChange={e => {
-              // const value = e.target.value
-              // console.log('onChange value:', value, typeof(value))
-              // priceList[index].price = value
-              // setPriceList([...priceList])
+              const value = e.target.value.split(',').join('')
+              const price = formatNumberWithCommas(value)
+              priceList[index].price = price
+              setPriceList([...priceList])
             }}
           />
         </Col>
       </Row>
-      <div style={{ textAlign: 'end', color: '#8D8D8D', paddingTop: '10px' }}>輸入0表示免費</div>
-      <Divider type='horizontal' style={{ marginTop: '10px' }}/>
+      <div
+        style={{ textAlign: 'end', color: '#8D8D8D', paddingTop: '10px' }}
+      >
+        輸入0表示免費
+      </div>
+      <Divider type='horizontal' style={{ marginTop: '10px' }} />
     </>
   )
 }
