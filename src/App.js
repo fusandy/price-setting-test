@@ -1,30 +1,50 @@
 import './App.css';
 
-import React, { useState } from 'react'
-import { Card } from 'antd'
+import React, { useState, useEffect } from 'react'
+import { findOverlapAndNotInclude } from './PriceSetting/actions'
+import { Button, Card } from 'antd'
 import { PlusOutlined } from '@ant-design/icons';
 
-import PriceSetting from './components/PriceSetting';
+import PriceSetting from './PriceSetting';
 
 const App = () => {
-  const [priceList, setPriceList] = useState([{}])
+  const [priceList, setPriceList] = useState([{
+    ageRange: [],
+    price: ''
+  }])
+  const [overlap, setOverlap] = useState([])
+  const [notInclude, setNotInclude] = useState([])
+
+  useEffect(() => {
+    const ageList = priceList.map(({ ageRange }) => ageRange) || []
+    const { overlap, notInclude } = findOverlapAndNotInclude(ageList)
+    setOverlap(overlap)
+    setNotInclude(notInclude)
+  }, [priceList])
 
   return (
     <div className="App">
-      <Card style={{ width: '80%' }}>
+      <Card style={{ width: '60%' }}>
         {priceList.map((detail, index) => {
-          return <PriceSetting key={index} detail={detail} index={index} priceList={priceList} setPriceList={setPriceList} />
+          return <PriceSetting key={index} detail={detail} index={index} priceList={priceList} setPriceList={setPriceList} overlap={overlap} />
         })}
-        <a
-          style={{ display: 'inline-block', marginTop: '10px' }}
+        <Button
+          disabled={notInclude.length === 0}
+          style={{
+            display: 'inline-block',
+            marginTop: '10px'
+          }}
           onClick={() => {
-            priceList.push({})
+            priceList.push({
+              ageRange: [],
+              price: ''
+            })
             setPriceList([...priceList])
           }}
         >
           <PlusOutlined />
           <span>新增價格設定</span>
-        </a>
+        </Button>
       </Card>
     </div>
   );
