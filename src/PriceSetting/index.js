@@ -40,23 +40,18 @@ const PriceSetting = ({ detail, index, priceList, setPriceList, overlap }) => {
                     }}
                   >Yes</Button>
                 </Col>
-
               </Row>
             }
-            title='Are you sure?'
+            title='Are you sure ?'
             trigger='click'
             open={openPopover}
             onOpenChange={() => {
               setOpenPopover(true)
             }}
           >
-            <span
-              className='delete-button'
-              // onClick={() => {
-              //   priceList.splice(index, 1)
-              //   setPriceList([...priceList])
-              // }}
-            ><CloseOutlined /> 刪除</span>
+            <span className='delete-button'>
+              <CloseOutlined /> 刪除
+            </span>
           </Popover>
         )}
       </Row>
