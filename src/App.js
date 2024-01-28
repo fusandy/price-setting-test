@@ -16,8 +16,8 @@ const App = () => {
   const [notInclude, setNotInclude] = useState([])
 
   useEffect(() => {
-    const ageList = priceList.map(({ ageRange }) => ageRange) || []
-    const { overlap, notInclude } = findOverlapAndNotInclude(ageList)
+    const ageRangeList = priceList.map(({ ageRange }) => ageRange) || []
+    const { overlap, notInclude } = findOverlapAndNotInclude(ageRangeList)
     setOverlap(overlap)
     setNotInclude(notInclude)
   }, [priceList])
@@ -25,9 +25,16 @@ const App = () => {
   return (
     <div className="App">
       <Card style={{ width: '60%' }}>
-        {priceList.map((detail, index) => {
-          return <PriceSetting key={index} detail={detail} index={index} priceList={priceList} setPriceList={setPriceList} overlap={overlap} />
-        })}
+        {priceList.map((detail, index) => (
+          <PriceSetting
+            key={index}
+            index={index}
+            detail={detail}
+            priceList={priceList}
+            setPriceList={setPriceList}
+            overlap={overlap}
+          />
+        ))}
         <Button
           disabled={notInclude.length === 0}
           style={{

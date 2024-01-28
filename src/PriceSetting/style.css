@@ -1,0 +1,30 @@
+.errorMsg {
+  width: 95%;
+  height: 30px;
+  color: red;
+  vertical-align: middle;
+  line-height: 30px;
+  border-radius: 6px;
+  background-color: #FBE9E8;
+  padding-left: 10px;
+  margin: 5px 0;
+}
+
+.priceMsg {
+  text-align: end;
+  color: #8D8D8D;
+  padding-top: 10px;
+}
+
+.errorBorder {
+  border: 1px solid red;
+}
+
+.errorBorderRadius {
+  border-radius: 6px;
+}
+
+.delete-button {
+  color: red;
+  cursor: pointer;
+}
