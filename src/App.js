@@ -7,6 +7,7 @@ import { PlusOutlined } from '@ant-design/icons';
 
 import PriceSetting from './PriceSetting';
 
+// test
 const App = () => {
   const [priceList, setPriceList] = useState([{
     ageRange: [],
